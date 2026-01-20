@@ -1,1 +1,697 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Payment | All In One Course</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            background-image: url('https://img.freepik.com/premium-photo/gold-wave-white-background-with-copy-space_1000823-30515.jpg?w=2000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: -1;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(191, 149, 63, 0.2);
+            letter-spacing: 1px;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #8a6d2e;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            color: #bf953f;
+            transform: translateX(-5px);
+        }
+        
+        /* Payment Card */
+        .payment-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(191, 149, 63, 0.15);
+            border: 2px solid rgba(191, 149, 63, 0.2);
+            margin-bottom: 30px;
+        }
+        
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .payment-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #8a6d2e;
+            margin-bottom: 10px;
+        }
+        
+        .payment-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Price Display */
+        .price-display {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(191, 149, 63, 0.1), rgba(252, 246, 186, 0.1));
+            border-radius: 15px;
+        }
+        
+        .original-price {
+            font-size: 1.5rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+        
+        .current-price {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #bf953f;
+            text-shadow: 0 2px 5px rgba(191, 149, 63, 0.3);
+        }
+        
+        .discount-badge {
+            display: inline-block;
+            background: linear-gradient(to right, #bf953f, #fcf6ba);
+            color: #8a6d2e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-left: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* Input Container */
+        .input__container {
+            max-width: 350px;
+            margin: 0 auto 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(191, 149, 63, 0.15), rgba(252, 246, 186, 0.15));
+            padding: 25px;
+            border-radius: 20px;
+            position: relative;
+            border: 1px solid rgba(191, 149, 63, 0.3);
+        }
+        
+        .input__container::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            filter: blur(15px);
+            border-radius: 20px;
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+            opacity: 0.3;
+        }
+        
+        .input__label {
+            display: block;
+            margin-left: 0.4em;
+            color: #8a6d2e;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .input__description {
+            font-size: 0.7em;
+            font-weight: bold;
+            text-align: center;
+            color: rgba(138, 109, 46, 0.7);
+        }
+        
+        .input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 0.8em;
+            padding-left: 1em;
+            border-radius: 15px;
+            background: #fff;
+            transition: background 300ms, color 300ms;
+            border: 1px solid rgba(191, 149, 63, 0.3);
+            font-size: 1.1rem;
+        }
+        
+        .input:hover, .input:focus {
+            background: rgba(191, 149, 63, 0.05);
+            border-color: #bf953f;
+        }
+        
+        /* Golden Button */
+        .Btn {
+            width: 220px;
+            height: 55px;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: #796703;
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            background-size: 200% 200%;
+            margin: 30px auto;
+        }
+        
+        .Btn:hover {
+            transform: scale(1.05);
+            animation: gradient 3s ease infinite;
+            background-position: right;
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Loader Button */
+        .loader__btn {
+            border: none;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728);
+            padding: 15px 30px 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: #796703;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            cursor: wait;
+            width: 220px;
+            margin: 30px auto;
+        }
+        
+        .loader {
+            border: 4px solid rgba(121, 103, 3, 0.1);
+            border-left-color: #796703;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            animation: spin89345 1s linear infinite;
+        }
+        
+        @keyframes spin89345 {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* QR Code Section */
+        .qr-section {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(191, 149, 63, 0.15);
+            border: 2px solid rgba(191, 149, 63, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .qr-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #8a6d2e;
+            margin-bottom: 15px;
+        }
+        
+        .qr-subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+        
+        .qr-code-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+        
+        .qr-code {
+            width: 220px;
+            height: 220px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 5px solid white;
+        }
+        
+        .qr-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(191, 149, 63, 0.9);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .qr-overlay:hover {
+            opacity: 1;
+        }
+        
+        .timer {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #bf953f;
+            margin-top: 20px;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .upi-info {
+            background: rgba(191, 149, 63, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #8a6d2e;
+        }
+        
+        .upi-id {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #bf953f;
+            margin-top: 5px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #8a6d2e;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(191, 149, 63, 0.15);
+            border: 2px solid rgba(191, 149, 63, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #bf953f;
+            margin-bottom: 20px;
+        }
+        
+        .success-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #8a6d2e;
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .payment-card {
+                padding: 25px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .payment-title {
+                font-size: 1.6rem;
+            }
+            
+            .current-price {
+                font-size: 2.2rem;
+            }
+            
+            .input__container {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .payment-card {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .payment-title {
+                font-size: 1.4rem;
+            }
+            
+            .current-price {
+                font-size: 1.8rem;
+            }
+            
+            .qr-code {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Overlay -->
+    <div class="overlay"></div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Back Button -->
+        <a href="/c1999" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Course
+        </a>
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">All In One Course</div>
+            <div style="color: #8a6d2e; margin-top: 10px; font-size: 1.1rem;">Secure Payment Gateway</div>
+        </div>
+        
+        <!-- Payment Card -->
+        <div class="payment-card">
+            <div class="payment-header">
+                <h1 class="payment-title">Complete Your Payment</h1>
+                <p class="payment-subtitle">Get instant access to the life-changing course</p>
+            </div>
+            
+            <!-- Price Display -->
+            <div class="price-display">
+                <span class="original-price">₹6999/-</span>
+                <span class="current-price">₹1999/-</span>
+                <span class="discount-badge">71% OFF</span>
+            </div>
+            
+            <!-- Input for Phone Number -->
+            <div class="input__container" id="phoneInputContainer">
+                <label class="input__label">What's your WhatsApp number?</label>
+                <input placeholder="91+ Enter your number" class="input" name="phone" type="tel" id="phoneInput">
+                <p class="input__description">Make sure it's your active WhatsApp number</p>
+            </div>
+            
+            <!-- Pay Now Button -->
+            <button class="Btn" id="payNowBtn">
+                <svg viewBox="0 0 576 512" height="1.2em" class="logoIcon">
+                    <path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"></path>
+                </svg>
+                PAY NOW ₹1999/-
+            </button>
+            
+            <!-- Loader Button (Initially Hidden) -->
+            <button class="loader__btn" id="loaderBtn" style="display: none;">
+                <div class="loader"></div>
+                Connecting To UPI...
+            </button>
+            
+            <!-- QR Code Section (Initially Hidden) -->
+            <div class="qr-section" id="qrSection">
+                <h2 class="qr-title">Scan QR Code to Pay</h2>
+                <p class="qr-subtitle">Scan this QR code with any UPI app to complete payment</p>
+                
+                <div class="qr-code-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=7992264387@ptyes&pn=All%20In%20One%20Course&am=1999&cu=INR&tn=Course%20Payment" alt="UPI QR Code" class="qr-code" id="qrCode">
+                    <div class="qr-overlay">
+                        <div>UPI ID:</div>
+                        <div style="font-size: 0.9rem; margin-top: 5px;">7992264387@ptyes</div>
+                    </div>
+                </div>
+                
+                <div class="timer" id="timer">Opening UPI in <span id="countdown">3</span> seconds...</div>
+                
+                <div class="upi-info">
+                    <div>UPI ID for Manual Payment:</div>
+                    <div class="upi-id">7992264387@ptyes</div>
+                    <div style="font-size: 0.8rem; margin-top: 10px;">Amount: ₹1999 | Note: Course Payment</div>
+                </div>
+                
+                <button class="Btn" id="openUpiBtn" style="margin-top: 20px;">
+                    <i class="fas fa-external-link-alt"></i>
+                    OPEN UPI APP NOW
+                </button>
+            </div>
+            
+            <!-- Success Message (Initially Hidden) -->
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✅</div>
+                <h2 class="success-title">Payment Successful!</h2>
+                <p style="color: #666; margin-bottom: 20px; font-size: 1.1rem;">Welcome to the All In One Course!</p>
+                <p style="color: #8a6d2e; margin-bottom: 15px;">You will receive WhatsApp invitation within 5 minutes.</p>
+                <p style="color: #bf953f; font-weight: 700;">Check your WhatsApp for group invitation!</p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2025 All In One Course. All rights reserved.</p>
+            <p style="margin-top: 5px; font-size: 0.8rem;">Secure payment powered by UPI • 100% Money-Back Guarantee</p>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const phoneInput = document.getElementById('phoneInput');
+        const payNowBtn = document.getElementById('payNowBtn');
+        const loaderBtn = document.getElementById('loaderBtn');
+        const qrSection = document.getElementById('qrSection');
+        const successMessage = document.getElementById('successMessage');
+        const countdownElement = document.getElementById('countdown');
+        const openUpiBtn = document.getElementById('openUpiBtn');
+        const qrCode = document.getElementById('qrCode');
+        
+        // Phone number validation regex
+        const phoneRegex = /^[6-9]\d{9}$/;
+        
+        // Pay Now Button Click Handler
+        payNowBtn.addEventListener('click', function() {
+            const phoneNumber = phoneInput.value.trim().replace(/\D/g, '');
+            
+            // Validate phone number
+            if (!phoneNumber || !phoneRegex.test(phoneNumber)) {
+                alert('Please enter a valid 10-digit Indian phone number');
+                phoneInput.focus();
+                return;
+            }
+            
+            // Show loader, hide pay button
+            payNowBtn.style.display = 'none';
+            loaderBtn.style.display = 'flex';
+            
+            // Simulate processing for 2 seconds
+            setTimeout(() => {
+                // Hide loader
+                loaderBtn.style.display = 'none';
+                
+                // Show QR code section
+                qrSection.style.display = 'block';
+                
+                // Start countdown
+                startCountdown();
+                
+            }, 2000);
+        });
+        
+        // Countdown function
+        function startCountdown() {
+            let countdown = 3;
+            countdownElement.textContent = countdown;
+            
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    openUpiApp();
+                }
+            }, 1000);
+        }
+        
+        // Open UPI App function
+        function openUpiApp() {
+            // UPI Deep Link
+            const upiLink = "upi://pay?pa=7992264387@ptyes&pn=All%20In%20One%20Course&am=1999&cu=INR&tn=Course%20Payment";
+            
+            // Try to open UPI app
+            window.location.href = upiLink;
+            
+            // Fallback: Show manual UPI ID
+            setTimeout(() => {
+                // Update timer text
+                countdownElement.parentElement.innerHTML = "UPI app opened!<br>If not, tap the button below";
+            }, 1000);
+        }
+        
+        // Open UPI Button Click Handler
+        openUpiBtn.addEventListener('click', function() {
+            openUpiApp();
+            
+            // After 5 seconds, show success message
+            setTimeout(() => {
+                qrSection.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Simulate sending WhatsApp invitation
+                simulateWhatsAppInvitation();
+            }, 5000);
+        });
+        
+        // Simulate WhatsApp invitation (for demo purposes)
+        function simulateWhatsAppInvitation() {
+            // In a real application, you would send an API request to your server
+            console.log(`WhatsApp invitation would be sent to: +91${phoneInput.value.trim().replace(/\D/g, '')}`);
+            
+            // For demo, we'll just log it
+            setTimeout(() => {
+                // You could add actual WhatsApp integration here
+                // window.open(`https://wa.me/91${phoneInput.value.trim().replace(/\D/g, '')}?text=Welcome%20to%20All%20In%20One%20Course!%20Here%20is%20your%20invitation%20link:...`, '_blank');
+            }, 2000);
+        }
+        
+        // QR Code hover effect
+        qrCode.addEventListener('mouseenter', function() {
+            this.nextElementSibling.style.opacity = '1';
+        });
+        
+        qrCode.addEventListener('mouseleave', function() {
+            this.nextElementSibling.style.opacity = '0';
+        });
+        
+        // Auto-focus on phone input
+        window.onload = function() {
+            phoneInput.focus();
+        };
+        
+        // Format phone number as user types
+        phoneInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            
+            this.value = value;
+        });
+    </script>
+</body>
+</html>
